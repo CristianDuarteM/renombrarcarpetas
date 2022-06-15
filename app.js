@@ -1,7 +1,7 @@
 const fs = require('fs');
 const colors = require("colors");
 
-let rutaArchivo = "C:/Users/UsuarioGastro/Downloads/Documentos/Gastrocompartida/GastroQuirurgica/CALIDAD/CALIDAD 2019";
+let rutaArchivo = "//administracion/GASTROQX COMPARTIDA/FACTURACION 2022";
 let rutasExcedidas = [];
 let rutasArregladas = [];
 const pathviejas = './viejas.json';
@@ -18,7 +18,7 @@ function listarRutasExcedidas (rutaArchivo, p = 0) {
     const stats = fs.lstatSync(rutaArchivo);
 
     if(!stats.isDirectory()){
-        if((rutaArchivo.length-61) + 76 >= 260){
+        if((rutaArchivo.length - 36) + 76 >= 260){
             rutasExcedidas.push(rutaArchivo);
             console.log(colors.green(rutaArchivo));
         }
@@ -79,7 +79,7 @@ function renombrarCarpetas(){
 
         //probar ir almacenando la cantidad de caracteres de los archivos.
 
-        while(((ruta.length + parteseliminadas) -61 +76) > 260){
+        while(((ruta.length + parteseliminadas) - 36 + 76) > 260){
             rutaseparada = ruta.split("/");
 
             parteseliminadas += rutaseparada[rutaseparada.length - 1].length;
@@ -125,14 +125,14 @@ function guardarDB () {
     };
 
     fs.writeFileSync(pathviejas, JSON.stringify( payload ) );
-    fs.writeFileSync(pathnuevas, JSON.stringify( payload2 ) );
+    //fs.writeFileSync(pathnuevas, JSON.stringify( payload2 ) );
 
 }
 
 verificarRuta();
 listarRutasExcedidas(rutaArchivo);
 //quitararchivos();
-renombrarCarpetas();
+//renombrarCarpetas();
 guardarDB();
 //console.log(rutasExcedidas.length);
 //console.log(rutasArregladas.length);
